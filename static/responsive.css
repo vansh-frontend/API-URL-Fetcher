@@ -1,0 +1,82 @@
+
+/* responsive.css - Mobile-first, simple white/yellow/black theme */
+
+body {
+  background: #fff;
+  color: #111;
+}
+
+.container {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-radius: 12px;
+}
+
+.card {
+  background: #fff;
+  border: 2px solid #ffe082;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: #111;
+}
+.card:hover {
+  border: 2px solid #ffd600;
+  box-shadow: 0 4px 16px rgba(255, 221, 51, 0.13);
+}
+
+button {
+  background: #ffd600;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 10px 22px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  transition: background 0.15s, color 0.15s;
+}
+button:hover, button:focus {
+  background: #ffb300;
+  color: #000;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+
+@media (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .container {
+    padding: 18px;
+  }
+}
+
+@media (min-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .container {
+    padding: 24px;
+  }
+}
+
+
+h1, h2 {
+  color: #ffd600;
+  letter-spacing: 1px;
+}
+
+strong {
+  color: #ffb300;
+}
+
+.error {
+  color: #d84315;
+}

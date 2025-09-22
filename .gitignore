@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+.venv/
+.DS_Store
+*.sqlite3
+instance/
+.webassets-cache
+
+# VSCode
+.vscode/
+
+# Node
+node_modules/
+dist/
+build/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# Frontend build
+/static/dist/
+/static/build/

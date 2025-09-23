@@ -1,6 +1,6 @@
-const CACHE_NAME = 'api-viewer-cache-v1';
+const CACHE_NAME = 'api-viewer-cache-v2';
 const APP_SHELL = [
-  '/',
+  // Do not cache '/' to avoid stale HTML
   '/static/style.css',
   '/static/responsive.css',
   '/static/img/gear.png',
@@ -8,6 +8,7 @@ const APP_SHELL = [
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
   );
@@ -16,18 +17,24 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) => (key !== CACHE_NAME ? caches.delete(key) : undefined))
-      )
-    )
+      Promise.all(keys.map((key) => (key !== CACHE_NAME ? caches.delete(key) : undefined)))
+    ).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Network-first for API calls, cache-first for same-origin static assets
-  if (request.url.includes('/api') || request.headers.get('accept')?.includes('application/json')) {
+  // Network-first for navigations (HTML) to prevent stale UI
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).catch(() => caches.match('/'))
+    );
+    return;
+  }
+
+  // Network-first for JSON/API requests
+  if (request.headers.get('accept')?.includes('application/json')) {
     event.respondWith(
       fetch(request)
         .then((response) => {
@@ -37,9 +44,11 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => caches.match(request))
     );
-  } else {
-    event.respondWith(
-      caches.match(request).then((cached) => cached || fetch(request))
-    );
+    return;
   }
+
+  // Cache-first for same-origin static assets
+  event.respondWith(
+    caches.match(request).then((cached) => cached || fetch(request))
+  );
 });

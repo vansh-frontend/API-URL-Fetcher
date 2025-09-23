@@ -1,82 +1,59 @@
 
-/* responsive.css - Mobile-first, simple white/yellow/black theme */
+/* responsive.css - Media queries only; complements base styles in style.css */
 
-body {
-  background: #fff;
-  color: #111;
-}
-
-.container {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  border-radius: 12px;
-}
-
-.card {
-  background: #fff;
-  border: 2px solid #ffe082;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  color: #111;
-}
-.card:hover {
-  border: 2px solid #ffd600;
-  box-shadow: 0 4px 16px rgba(255, 221, 51, 0.13);
-}
-
-button {
-  background: #ffd600;
-  color: #111;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  padding: 10px 22px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  transition: background 0.15s, color 0.15s;
-}
-button:hover, button:focus {
-  background: #ffb300;
-  color: #000;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-
-
+/* Small tablets and up */
 @media (min-width: 600px) {
+  .container {
+    padding: 20px 18px;
+  }
+  button {
+    width: auto; /* no full-width buttons on larger screens */
+  }
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  .container {
-    padding: 18px;
+    gap: 16px;
   }
 }
 
+/* Desktops and large screens */
 @media (min-width: 900px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
   .container {
+    margin: 40px auto;
     padding: 24px;
   }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    gap: 18px;
+  }
 }
 
-
-h1, h2 {
-  color: #ffd600;
-  letter-spacing: 1px;
+/* Very large desktops */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1280px;
+  }
+  .card-grid {
+    grid-template-columns: repeat(4, minmax(260px, 1fr));
+    gap: 20px;
+  }
 }
 
-strong {
-  color: #ffb300;
+/* Visual hover refinements on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-3px);
+  }
 }
 
-.error {
-  color: #d84315;
+/* Color accents for larger headers */
+@media (min-width: 900px) {
+  h1::after {
+    width: 72px;
+  }
 }

@@ -1,0 +1,17 @@
+{
+  "name": "API Data Viewer",
+  "short_name": "API Viewer",
+  "description": "Fetch and view JSON from any API URL.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffd600",
+  "icons": [
+    {
+      "src": "/static/img/gear.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

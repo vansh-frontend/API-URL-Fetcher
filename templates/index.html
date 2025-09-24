@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>API Data Viewer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#ffd600" />
+  <meta name="theme-color" content="#2563eb" />
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/gear.png') }}">
   <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -13,24 +13,71 @@
 <body>
   <div class="container">
     <h1>API Data Viewer</h1>
-    <form method="POST">
+
+    <!-- API form -->
+    <form method="POST" class="api-form">
       <input type="text" name="api_url" placeholder="Enter API URL" required>
       <button type="submit">Fetch Data</button>
     </form>
 
+    <!-- Helper text -->
+    <p class="hint">🔎 Example: <code>https://jsonplaceholder.typicode.com/posts</code></p>
+
+    <!-- SVG illustration of fetch process -->
+<div class="process-illustration">
+  <svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- API Server -->
+    <rect x="20" y="40" width="120" height="100" rx="12" fill="#2563eb" />
+    <text x="80" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">API Server</text>
+
+    <!-- Arrow -->
+    <line x1="140" y1="90" x2="200" y2="90" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Processing Gear (isolated group) -->
+    <g>
+      <circle cx="260" cy="90" r="40" fill="#f59e0b" />
+      <text x="260" y="96" text-anchor="middle" font-size="26" fill="#fff">⚙️</text>
+      <animateTransform attributeName="transform" type="rotate"
+        from="0 260 90" to="360 260 90" dur="3s" repeatCount="indefinite"/>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="300" y1="90" x2="370" y2="90" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Database -->
+    <rect x="370" y="40" width="120" height="100" rx="12" fill="#0ea5e9"/>
+    <text x="430" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Database</text>
+
+    <!-- Arrow -->
+    <line x1="490" y1="90" x2="560" y2="90" stroke="#4b5563" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Results -->
+    <rect x="560" y="40" width="120" height="100" rx="12" fill="#10b981" />
+    <text x="620" y="95" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Results</text>
+
+    <!-- Arrow marker -->
+    <defs>
+      <marker id="arrow" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,12 L12,6 z" fill="#4b5563" />
+      </marker>
+    </defs>
+  </svg>
+</div>
+
+    <!-- Error handling -->
     {% if error %}
-      <p class="error">Error: {{ error }}</p>
+      <p class="error">⚠️ {{ error }}</p>
     {% endif %}
 
+    <!-- Results -->
     {% if data %}
       <h2>Results from {{ url }}</h2>
       <div class="card-grid">
         {% if data is mapping %}
           <div class="card">
             {% for key, value in data.items() %}
-              <div style="margin-bottom:8px;">
-                <strong>{{ key|capitalize }}:</strong> {{ value }}
-              </div>
+              <div class="item"><strong>{{ key|capitalize }}:</strong> {{ value }}</div>
             {% endfor %}
           </div>
         {% elif data is iterable and data is not string %}
@@ -38,9 +85,7 @@
             <div class="card">
               {% if item is mapping %}
                 {% for key, value in item.items() %}
-                  <div style="margin-bottom:8px;">
-                    <strong>{{ key|capitalize }}:</strong> {{ value }}
-                  </div>
+                  <div class="item"><strong>{{ key|capitalize }}:</strong> {{ value }}</div>
                 {% endfor %}
               {% else %}
                 {{ item }}
@@ -48,13 +93,19 @@
             </div>
           {% endfor %}
         {% else %}
-          <div class="card">
-            {{ data }}
-          </div>
+          <div class="card">{{ data }}</div>
         {% endif %}
       </div>
     {% endif %}
   </div>
+
+  <!-- Footer -->
+
+  <footer class="footer">
+    <p>build with ❤️ by <a href="https://github.com/vansh-frontend">@vansh-frontend</a></p>
+    <p>⚡ Built with Flask & Python | API Data Viewer</p>
+  </footer>
+  
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

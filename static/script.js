@@ -1,19 +1,21 @@
 (function() {
+  // Unregister any existing service workers to avoid caching issues
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js').catch(function(err) {
-        console.warn('SW registration failed', err);
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      registrations.forEach(function(registration) {
+        registration.unregister();
       });
     });
   }
 
-  // Optional: show install prompt if supported
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault();
-    deferredPrompt = e;
-    // Could expose a custom UI trigger if needed
-    // Example: auto-prompt once
-    deferredPrompt.prompt();
-  });
+  // Clear app-specific caches that may hold old CSS/JS
+  if (window.caches && typeof window.caches.keys === 'function') {
+    caches.keys().then(function(keys) {
+      return Promise.all(
+        keys
+          .filter(function(key) { return key.includes('api-viewer-cache'); })
+          .map(function(key) { return caches.delete(key); })
+      );
+    });
+  }
 })();

@@ -9,6 +9,15 @@
   <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='responsive.css') }}">
+
+  <style>
+    h3{
+        margin: 18px 0 8px 0;
+        font-size:1rem;
+        color:blue;
+    }
+
+  </style>
 </head>
 <body>
   <div class="container">
@@ -72,7 +81,7 @@
 
     <!-- Results -->
     {% if data %}
-      <h2>Results from {{ url }}</h2>
+      <h3>Results from {{ url }}</h3>
       <div class="card-grid">
         {% if data is mapping %}
           <div class="card">

@@ -1,10 +1,10 @@
 const CACHE_NAME = 'api-viewer-cache-v2';
 const APP_SHELL = [
   // Do not cache '/' to avoid stale HTML
-  '/static/style.css',
-  '/static/responsive.css',
-  '/static/img/gear.png',
-  '/static/script.js'
+  // '/static/style.css',
+  // '/static/responsive.css',
+  // '/static/img/gear.png',
+  // '/static/script.js'
 ];
 
 self.addEventListener('install', (event) => {

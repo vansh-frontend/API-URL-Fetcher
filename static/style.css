@@ -209,9 +209,10 @@ button:focus {
 /* Hint Text */
 .hint {
   color: var(--gray-500);
-  font-size: 0.875rem;
+  font-size: 1rem;
   text-align: center;
   margin: var(--space-4) 0;
+  margin-right: 40px;
   padding: var(--space-3) var(--space-4);
   background: var(--gray-100);
   border-radius: var(--radius-md);
@@ -223,7 +224,7 @@ button:focus {
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   color: var(--primary-blue);
   border: 1px solid var(--gray-200);
 }

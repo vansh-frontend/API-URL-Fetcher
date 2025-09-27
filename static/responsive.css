@@ -1,59 +1,232 @@
+/* ===== responsive.css - Complete Responsive Design System ===== */
 
-/* responsive.css - Media queries only; complements base styles in style.css */
+/* Small mobile landscape (480px+) */
+@media (min-width: 480px) {
+  body {
+    font-size: 15px;
+  }
 
-/* Small tablets and up */
-@media (min-width: 600px) {
+  .app-wrapper {
+    padding: 16px;
+  }
+
   .container {
-    padding: 20px 18px;
+    padding: 20px;
   }
-  button {
-    width: auto; /* no full-width buttons on larger screens */
+
+  .header h1 {
+    font-size: 1.75rem;
   }
+
+  .nav-tabs {
+    margin-bottom: 24px;
+  }
+
+  .nav-tab {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
   .card-grid {
+    gap: 16px;
+  }
+
+  /* Form improvements */
+  .form-row {
+    display: flex;
+    gap: 12px;
+    align-items: end;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  .form-row .btn {
+    flex-shrink: 0;
+  }
+
+  /* Stats grid for mobile landscape */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .stat-card {
+    background: var(--white);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--card-border);
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--python-blue);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* Small tablets (600px+) */
+@media (min-width: 600px) {
+  .app-wrapper {
+    padding: 20px;
+  }
+
+  .container {
+    padding: 24px;
+    margin: 20px auto;
+  }
+
+  .header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header h1::after {
+    width: 64px;
+    height: 4px;
+  }
+
+  /* Grid layouts */
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  /* Button improvements */
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn:not(.btn-full) {
+    width: auto;
+    min-width: 120px;
+  }
+
+  /* Enhanced form layouts */
+  .form-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-}
 
-/* Desktops and large screens */
-@media (min-width: 900px) {
-  .container {
-    margin: 40px auto;
-    padding: 24px;
+  .form-grid .form-group {
+    margin-bottom: 0;
   }
-  h1 {
-    font-size: 2rem;
-  }
-  h2 {
-    font-size: 1.25rem;
-  }
-  .card-grid {
-    grid-template-columns: repeat(3, minmax(260px, 1fr));
-    gap: 18px;
-  }
-}
 
-/* Very large desktops */
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1280px;
+  /* Navigation improvements */
+  .nav-tabs {
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto 32px;
   }
-  .card-grid {
-    grid-template-columns: repeat(4, minmax(260px, 1fr));
+
+  /* Table responsiveness */
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+
+  /* Card enhancements */
+  .card-horizontal {
+    display: flex;
+    align-items: center;
     gap: 20px;
   }
-}
 
-/* Visual hover refinements on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    transform: translateY(-3px);
+  .card-horizontal .card-content {
+    flex: 1;
   }
-}
 
-/* Color accents for larger headers */
-@media (min-width: 900px) {
-  h1::after {
-    width: 72px;
+  .card-horizontal .card-media {
+    width: 100px;
+    height: 100px;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
   }
+
+  /* Sidebar layout */
+  .layout-sidebar {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .sidebar {
+    background: var(--white);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    position: sticky;
+    top: 20px;
+  }
+
+  .sidebar-nav {
+    list-style: none;
+  }
+
+  .sidebar-nav li {
+    margin-bottom: 8px;
+  }
+
+  .sidebar-nav a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    transition: var(--transition);
+  }
+
+ .sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background: var(--light-blue);
+  color: var(--python-blue);
+}
 }
